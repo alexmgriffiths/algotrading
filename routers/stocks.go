@@ -15,6 +15,7 @@ func StocksRouter(engine *gin.RouterGroup) *gin.RouterGroup {
 
 		// Fundamentals
 		stocksRouter.GET("/:symbol", fundamentals.Profile)
+		stocksRouter.GET("/:symbol/eod", stocks.EOD)
 		stocksRouter.GET("/:symbol/dividends", fundamentals.Dividends)
 		stocksRouter.GET("/:symbol/splits", fundamentals.Splits)
 		stocksRouter.GET("/:symbol/earnings", fundamentals.Earnings)
