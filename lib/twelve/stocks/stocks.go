@@ -107,3 +107,16 @@ func (t *Stocks) GetEOD(symbol string) (models.EOD, error) {
 	}
 	return eod, nil
 }
+
+func (t *Stocks) GetTimeSeries(symbol string, interval string) (models.TimeSeries, error) {
+	resBody, err := t.MakeRequest(fmt.Sprintf("time_series?symbol=%s:NASDAQ&interval=%s", symbol, interval))
+	if err != nil {
+		return models.TimeSeries{}, err
+	}
+
+	var timeSeries models.TimeSeries
+	if err := t.UnmarshalData(resBody, &timeSeries); err != nil {
+		return models.TimeSeries{}, err
+	}
+	return timeSeries, nil
+}
